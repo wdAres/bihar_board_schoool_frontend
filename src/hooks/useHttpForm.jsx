@@ -6,7 +6,7 @@ import { base_url } from '../utils/base_url';
 const useHttpForm = () => {
 
     const [isLoading, setLoading] = useState(false)
-    const current_user = Cookies.get('admin') ? JSON.parse(Cookies.get('admin')) : null
+    const current_user = Cookies.get('school') ? JSON.parse(Cookies.get('school')) : null
     let token = current_user?.token
     const [error, setError] = useState(null)
 

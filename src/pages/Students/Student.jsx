@@ -8,10 +8,11 @@ import { schoolColumn, studentColumn } from '../../utils/Columns'
 import SearchBar from '../../components/filter/SearchBar'
 import { FaPlus } from 'react-icons/fa'
 import { Button } from 'antd'
-
+import Cookies from 'js-cookie'
 
 const Students = () => {
 
+  const center_id = JSON.parse(Cookies.get('school') ?? {})?.user?.id
   const [date, setDate] = useState(new Date())
   const [query, setQuery] = useState('')
   const { sendRequest, isLoading } = useHttp2()
@@ -40,7 +41,7 @@ const Students = () => {
 
   const getData = () => {
     sendRequest({
-        url: `students?limit=${limit}&page=${page}&search=${query}`
+        url: `students/center/${center_id}?limit=${limit}&page=${page}&search=${query}`
     }, result => {
       setData(result.data.docs)
       setPageDetails({ ...result.data, docs: [] })

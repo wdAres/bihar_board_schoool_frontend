@@ -13,30 +13,30 @@ import { PiStudent } from 'react-icons/pi';
 function Sidebar({ sidebar, handleSidebar }) {
 
     const linksArr = [
-        {
-            key: '01',
-            icon: <FaSchool size={14} />,
-            label: 'School List',
-            link: '/school'
-        },
-        {
-            key: '02',
-            icon: <LuContact size={14} />,
-            label: 'Contacts',
-            link: '/contacts'
-        },
-        {
-            key: '03',
-            icon: <FaRegQuestionCircle size={14} />,
-            label: 'Inquiries',
-            link: '/inquiries'
-        },
-        {
-            key: '04',
-            icon: <TfiAnnouncement size={14} />,
-            label: 'Updates',
-            link: '/updates'
-        },
+        // {
+        //     key: '01',
+        //     icon: <FaSchool size={14} />,
+        //     label: 'School List',
+        //     link: '/school'
+        // },
+        // {
+        //     key: '02',
+        //     icon: <LuContact size={14} />,
+        //     label: 'Contacts',
+        //     link: '/contacts'
+        // },
+        // {
+        //     key: '03',
+        //     icon: <FaRegQuestionCircle size={14} />,
+        //     label: 'Inquiries',
+        //     link: '/inquiries'
+        // },
+        // {
+        //     key: '04',
+        //     icon: <TfiAnnouncement size={14} />,
+        //     label: 'Updates',
+        //     link: '/updates'
+        // },
         {
             key: '05',
             icon: <PiStudent size={14} />,

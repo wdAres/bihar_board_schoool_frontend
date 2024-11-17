@@ -48,8 +48,8 @@ const Login = () => {
             },
             body: values
         }, result => {
-            Cookies.set('admin', JSON.stringify(result.data))
-            navigate('/school')
+            Cookies.set('school', JSON.stringify(result.data))
+            navigate('/student')
         }, true)
     };
 
@@ -72,7 +72,7 @@ const Login = () => {
                 }}
                 onFinish={onFinish}
             >
-                <h1 className={classes.heading}>Admin Login</h1>
+                <h1 className={classes.heading}>School Login</h1>
 
 
                 {inputData.map(element => <FormItem key={element.name} {...element} />)}
