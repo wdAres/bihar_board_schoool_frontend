@@ -10,7 +10,7 @@ const Header = ({ handleSidebar }) => {
 
     const handleLogout = () => {
         navigate('/login')
-        Cookies.remove('affiliate')
+        Cookies.remove('school')
     }
 
     return (

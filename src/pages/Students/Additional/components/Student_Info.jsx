@@ -5,123 +5,214 @@ import FormItem from '../../../../components/FormItem/FormItem'
 const S_Info = () => {
 
     const inputFields = [
-            { label: 'Student Name', name: 'student_name', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            { label: 'Student Email', name: 'student_email', rules: [{ required: true, type: 'email' }], element: (data) => <Input {...data} /> },
-            { label: 'Student Mobile Number', name: 'student_mobile_number', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            { label: 'Student Father Name', name: 'student_father_name', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            { label: 'Student Mother Name', name: 'student_mother_name', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            { label: 'Date of Birth in Figures', name: 'dob_in_figures', rules: [{ required: true }], element: (data) => <Input type='date' {...data} /> },
-            { label: 'Date of Birth in Words', name: 'dob_in_words', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            {
-                label: 'Additional Subject',
-                name: 'additional_subject',
-                rules: [{ required: true }],
-                dataObj: {
-                    options: [
-                        { label: 'Maths', value: 'maths' },
-                        { label: 'Home Science', value: 'home science' },
-                        { label: 'Maithili', value: 'maithili' },
-                        { label: 'Music', value: 'music' },
-                        { label: 'Economics', value: 'economics' },
-                        { label: 'Porohitya', value: 'porohitya' },
-                        { label: 'Bhojpuri', value: 'bhojpuri' }
-                    ]
-                },
-                element: (data) => <Select {...data} />
+        { 
+            label: 'Student Name', 
+            name: 'student_name', 
+            rules: [
+                { required: true, message: 'Student name is required' },
+                { pattern: /^(?!.* {2}).*$/, message: 'No more than one space between words' }
+            ], 
+            element: (data) => <Input {...data} /> 
+        },
+        { 
+            label: 'Student Email', 
+            name: 'student_email', 
+            rules: [
+                { required: true, message: 'Student email is required' },
+                { type: 'email', message: 'Please enter a valid email' }
+            ], 
+            element: (data) => <Input {...data} /> 
+        },
+        { 
+            label: 'Student Mobile Number', 
+            name: 'student_mobile_number', 
+            rules: [
+                { required: true, message: 'Mobile number is required' },
+                { pattern: /^\d{10}$/, message: 'Mobile number must be 10 digits' }
+            ], 
+            element: (data) => <Input {...data} /> 
+        },
+        { 
+            label: 'Student Father Name', 
+            name: 'student_father_name', 
+            rules: [
+                { required: true, message: 'Father name is required' },
+                { pattern: /^(?!.* {2}).*$/, message: 'No more than one space between words' }
+            ], 
+            element: (data) => <Input {...data} /> 
+        },
+        { 
+            label: 'Student Mother Name', 
+            name: 'student_mother_name', 
+            rules: [
+                { required: true, message: 'Mother name is required' },
+                { pattern: /^(?!.* {2}).*$/, message: 'No more than one space between words' }
+            ], 
+            element: (data) => <Input {...data} /> 
+        },
+        { 
+            label: 'Date of Birth in Figures', 
+            name: 'dob_in_figures', 
+            rules: [{ required: true, message: 'Date of birth is required' }], 
+            element: (data) => <Input type='date' {...data} /> 
+        },
+        // { 
+        //     label: 'Date of Birth in Words', 
+        //     name: 'dob_in_words', 
+        //     rules: [{ required: true, message: 'Date of birth in words is required' }], 
+        //     element: (data) => <Input {...data} /> 
+        // },
+        {
+            label: 'Additional Subject',
+            name: 'additional_subject',
+            rules: [{ required: true, message: 'Additional subject is required' }],
+            dataObj: {
+                options: [
+                    { label: 'Maths', value: 'maths' },
+                    { label: 'Home Science', value: 'home science' },
+                    { label: 'Maithili', value: 'maithili' },
+                    { label: 'Music', value: 'music' },
+                    { label: 'Economics', value: 'economics' },
+                    { label: 'Porohitya', value: 'porohitya' },
+                    { label: 'Bhojpuri', value: 'bhojpuri' }
+                ]
             },
-            {
-                label: 'Gender',
-                name: 'gender',
-                rules: [{ required: true }],
-                dataObj: {
-                    options: [
-                        { label: 'Male', value: 'male' },
-                        { label: 'Female', value: 'female' },
-                        { label: 'Transgender', value: 'transgender' }
-                    ]
-                },
-                element: (data) => <Select {...data} />
+            element: (data) => <Select {...data} />
+        },
+        {
+            label: 'Gender',
+            name: 'gender',
+            rules: [{ required: true, message: 'Gender is required' }],
+            dataObj: {
+                options: [
+                    { label: 'Male', value: 'male' },
+                    { label: 'Female', value: 'female' },
+                    { label: 'Transgender', value: 'transgender' }
+                ]
             },
-            {
-                label: 'Caste Category',
-                name: 'caste_category',
-                rules: [{ required: true }],
-                dataObj: {
-                    options: [
-                        { label: 'General', value: 'general' },
-                        { label: 'BC1', value: 'bc1' },
-                        { label: 'BC2', value: 'bc2' },
-                        { label: 'SC', value: 'sc' },
-                        { label: 'ST', value: 'st' }
-                    ]
-                },
-                element: (data) => <Select {...data} />
+            element: (data) => <Select {...data} />
+        },
+        {
+            label: 'Caste Category',
+            name: 'caste_category',
+            rules: [{ required: true, message: 'Caste category is required' }],
+            dataObj: {
+                options: [
+                    { label: 'General', value: 'general' },
+                    { label: 'BC1', value: 'bc1' },
+                    { label: 'BC2', value: 'bc2' },
+                    { label: 'SC', value: 'sc' },
+                    { label: 'ST', value: 'st' }
+                ]
             },
-            { label: 'Student Address Mohalla', name: 'student_address_mohalla', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            { label: 'Student Address PO', name: 'student_address_po', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            { label: 'Student Address Sub Division', name: 'student_address_sub_div', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            { label: 'Student Address Pin', name: 'student_address_pin', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            { label: 'Student Address PS', name: 'student_address_ps', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            { label: 'Student Address District', name: 'student_address_dist', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            { label: 'Student Aadhar Number', name: 'student_aadhar_number', rules: [{ required: true }], element: (data) => <Input {...data} /> },
-            {
-                label: 'Nationality',
-                name: 'nationality',
-                rules: [{ required: true }],
-                dataObj: {
-                    options: [
-                        { label: 'Indian', value: 'indian' },
-                        { label: 'Others', value: 'others' }
-                    ]
-                },
-                element: (data) => <Select {...data} />
+            element: (data) => <Select {...data} />
+        },
+        { 
+            label: 'Student Address Mohalla', 
+            name: 'student_address_mohalla', 
+            rules: [{ required: true, message: 'Address is required' }], 
+            element: (data) => <Input {...data} /> 
+        },
+        { 
+            label: 'Student Address PO', 
+            name: 'student_address_po', 
+            rules: [{ required: true, message: 'Address is required' }], 
+            element: (data) => <Input {...data} /> 
+        },
+        { 
+            label: 'Student Address Sub Division', 
+            name: 'student_address_sub_div', 
+            rules: [{ required: true, message: 'Sub division is required' }], 
+            element: (data) => <Input {...data} /> 
+        },
+        { 
+            label: 'Student Address Pin', 
+            name: 'student_address_pin', 
+            rules: [
+                { required: true, message: 'Pin is required' },
+                { pattern: /^\d+$/, message: 'Pin must be only digits' }
+            ], 
+            element: (data) => <Input {...data} /> 
+        },
+        { 
+            label: 'Student Address PS', 
+            name: 'student_address_ps', 
+            rules: [{ required: true, message: 'Address is required' }], 
+            element: (data) => <Input {...data} /> 
+        },
+        { 
+            label: 'Student Address District', 
+            name: 'student_address_dist', 
+            rules: [{ required: true, message: 'District is required' }], 
+            element: (data) => <Input {...data} /> 
+        },
+        { 
+            label: 'Student Aadhar Number', 
+            name: 'student_aadhar_number', 
+            rules: [
+                { required: true, message: 'Aadhar number is required' },
+                { pattern: /^\d{12}$/, message: 'Aadhar number must be exactly 12 digits' }
+            ], 
+            element: (data) => <Input {...data} /> 
+        },
+        {
+            label: 'Nationality',
+            name: 'nationality',
+            rules: [{ required: true, message: 'Nationality is required' }],
+            dataObj: {
+                options: [
+                    { label: 'Indian', value: 'indian' },
+                    { label: 'Others', value: 'others' }
+                ]
             },
-            {
-                label: 'Religion',
-                name: 'religion',
-                rules: [{ required: true }],
-                dataObj: {
-                    options: [
-                        { label: 'Hindu', value: 'hindu' },
-                        { label: 'Muslim', value: 'muslim' },
-                        { label: 'Sikh', value: 'shikh' },
-                        { label: 'Christian', value: 'christian' },
-                        { label: 'Others', value: 'others' }
-                    ]
-                },
-                element: (data) => <Select {...data} />
+            element: (data) => <Select {...data} />
+        },
+        {
+            label: 'Religion',
+            name: 'religion',
+            rules: [{ required: true, message: 'Religion is required' }],
+            dataObj: {
+                options: [
+                    { label: 'Hindu', value: 'hindu' },
+                    { label: 'Muslim', value: 'muslim' },
+                    { label: 'Sikh', value: 'sikh' },
+                    { label: 'Christian', value: 'christian' },
+                    { label: 'Others', value: 'others' }
+                ]
             },
-            {
-                label: 'Handicapped',
-                name: 'handicapped',
-                rules: [{ required: true }],
-                dataObj: {
-                    options: [
-                        { label: 'None', value: 'none' },
-                        { label: 'Blind', value: 'blind' },
-                        { label: 'Deaf', value: 'deaf' },
-                        { label: 'Physically Handicapped', value: 'physically handicapped' },
-                        { label: 'Dystixc', value: 'dystixc' },
-                        { label: 'Spastic', value: 'spastic' }
-                    ]
-                },
-                element: (data) => <Select {...data} />
+            element: (data) => <Select {...data} />
+        },
+        {
+            label: 'Handicapped',
+            name: 'handicapped',
+            rules: [{ required: true, message: 'Handicapped status is required' }],
+            dataObj: {
+                options: [
+                    { label: 'None', value: 'none' },
+                    { label: 'Blind', value: 'blind' },
+                    { label: 'Deaf', value: 'deaf' },
+                    { label: 'Physically Handicapped', value: 'physically handicapped' },
+                    { label: 'Dystixc', value: 'dystixc' },
+                    { label: 'Spastic', value: 'spastic' }
+                ]
             },
-            {
-                label: 'Student Category',
-                name: 'student_category',
-                rules: [{ required: true }],
-                dataObj: {
-                    options: [
-                        { label: 'Regular', value: 'regular' },
-                        { label: 'Private', value: 'private' },
-                        { label: 'Ex', value: 'ex' }
-                    ]
-                },
-                element: (data) => <Select {...data} />
+            element: (data) => <Select {...data} />
+        },
+        {
+            label: 'Student Category',
+            name: 'student_category',
+            rules: [{ required: true, message: 'Student category is required' }],
+            dataObj: {
+                options: [
+                    { label: 'Regular', value: 'regular' },
+                    { label: 'Private', value: 'private' },
+                    { label: 'Ex', value: 'ex' }
+                ]
             },
+            element: (data) => <Select {...data} />
+        }
     ];
-
+    
 
     return (
         <Card

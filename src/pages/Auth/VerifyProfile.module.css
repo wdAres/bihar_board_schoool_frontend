@@ -1,0 +1,38 @@
+.section {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+    max-width: 1200px;
+    display: flex;
+    margin-inline: auto;
+}
+.section_top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    row-gap: 10px;
+    line-height: 25px;
+}
+
+.section_top h1 {
+    font-weight: 600;
+}
+.section_top p {
+    font-size: 15px;
+    font-weight: 400;
+    color: #7a7878;
+}
+
+.form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+}
+
+.btn {
+    width: 100%;
+    margin-top: 50px;
+    height: 50px;
+}

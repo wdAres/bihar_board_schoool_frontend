@@ -42,6 +42,18 @@ function Sidebar({ sidebar, handleSidebar }) {
             icon: <PiStudent size={14} />,
             label: 'Students',
             link: '/student'
+        },
+        {
+            key: '05',
+            icon: <PiStudent size={14} />,
+            label: 'Update Profile',
+            link: '/profile'
+        },
+        {
+            key: '05',
+            icon: <PiStudent size={14} />,
+            label: 'Support',
+            link: '/support'
         }
     ]
 

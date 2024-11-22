@@ -6,7 +6,7 @@ import MyUpload from '../../../../components/MyUpload/MyUpload'
 import { FaDumpster, FaPlus } from 'react-icons/fa'
 import { checkFileSize, checkFileType, handleFile } from '../../../../utils/fileOperations'
 import MyUpload2 from '../../../../components/MyUpload/MyUpload2'
-const Upload_Docuements = () => {
+const Upload_Docuements = ({studentPhoto=[] ,studentSign=[],parentSign=[], handleFiles=()=>{}}) => {
 
 
     // const [studentPhoto, setStudentPhoto] = useState()
@@ -24,23 +24,12 @@ const Upload_Docuements = () => {
             label: 'Student Photo',
             name: 'student_photo',
             rules: [{ required: true }],
-            // dataObj: {
-            //     maxCount: 1,
-            //     onChange: file => handleFile(file, setStudentPhoto),
-            //     beforeUpload: file => {
-            //         const fileType = checkFileType(file, 'image/png', 'image/jpeg', 'images/jpg')
-            //         const fileSize = checkFileSize(file, 1)
-            //         return false
-            //     },
-            //     showUploadList: true
-            // },
-            // element: (data) => <Upload  {...data}>
-            //     <MyUpload2 file={studentPhoto} />
-            // </Upload>
             dataObj: {
                 maxCount: 1,
                 listType:'picture-card',
-                beforeUpload:x=>false
+                beforeUpload:x=>false,
+                fileList:studentPhoto,
+                onChange:fileList=>handleFiles(fileList,'student_photo')
             },
             element: (data) => <Upload  {...data}>
                 {uploadButton}
@@ -53,20 +42,9 @@ const Upload_Docuements = () => {
             dataObj: {
                 maxCount: 1,
                 listType:'picture-card',
-                beforeUpload:x=>false
-            },
-            element: (data) => <Upload  {...data}>
-                {uploadButton}
-            </Upload>
-        },
-        {
-            label: 'Student Signature',
-            name: 'student_signature',
-            rules: [{ required: true }],
-            dataObj: {
-                maxCount: 1,
-                listType:'picture-card',
-                beforeUpload:x=>false
+                beforeUpload:x=>false,
+                fileList:studentSign,
+                onChange:fileList=>handleFiles(fileList,'student_signature')
             },
             element: (data) => <Upload  {...data}>
                 {uploadButton}
@@ -79,38 +57,14 @@ const Upload_Docuements = () => {
             dataObj: {
                 maxCount: 1,
                 listType:'picture-card',
-                beforeUpload:x=>false
+                beforeUpload:x=>false,
+                fileList:parentSign,
+                onChange:fileList=>handleFiles(fileList,'parent_signature')
             },
             element: (data) => <Upload  {...data}>
                 {uploadButton}
             </Upload>
-        },
-        {
-            label: 'School Principal Signature',
-            name: 'school_principal_signature',
-            rules: [{ required: true }],
-            dataObj: {
-                maxCount: 1,
-                listType:'picture-card',
-                beforeUpload:x=>false
-            },
-            element: (data) => <Upload  {...data}>
-                {uploadButton}
-            </Upload>
-        },
-        {
-            label: 'Center Signature',
-            name: 'center_signature',
-            rules: [{ required: true }],
-            dataObj: {
-                maxCount: 1,
-                listType:'picture-card',
-                beforeUpload:x=>false
-            },
-            element: (data) => <Upload  {...data}>
-                {uploadButton}
-            </Upload>
-        },
+        }
     ];
 
 

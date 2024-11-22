@@ -6,18 +6,18 @@ import { ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
 import Header from './components/LayoytElements/Header';
+import VerifyProfile from './pages/Auth/VerifyProfile';
 const { Content } = Layout;
 
 
 const LayoutFile = ({children}) => {
     const navigate = useNavigate()
-    const isUserAvailable = Cookies.get('admin')
+    const school = Cookies.get('school') ? JSON.parse(Cookies.get('school')) : false
     const [sidebar , setSidebar] = useState(false)
 
     useEffect(() => {
-        // console.log('here');
-        !isUserAvailable ? navigate('/login') : ''
-    }, [isUserAvailable])
+        !school ? navigate('/login') : school.user.profile_review ? '' : navigate('/verify-profile')
+    }, [school])
 
     const handleSidebar = ()=>setSidebar(!sidebar)
 

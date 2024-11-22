@@ -153,7 +153,7 @@ export const allGeneratedLinksColumns = (handleView, handleDelete) => (
       title: 'Expires At',
       dataIndex: 'expiresAt',
       render: (_, { expiresAt }) => (
-        <div>{moment(expiresAt).format('YYYY-MM-DD')}</div>
+        <div>{moment(expiresAt).format('DD-MM-YYYY')}</div>
       ),
       align: 'center'
     },
@@ -200,7 +200,7 @@ export const salesTableColumns = [
     dataIndex: 'date',
     key: 'date',
     render: (_, { date }) => (
-      <p>{moment(date).format('YYYY-MM-DD')}</p>
+      <p>{moment(date).format('DD-MM-YYYY')}</p>
     ),
     align: 'center'
   },
@@ -286,7 +286,7 @@ export const supportTableColumns = (handleView) => (
       title: 'Date',
       dataIndex: 'createdAt',
       render: (_, { createdAt }) => (
-        moment(createdAt).format('YYYY-MM-DD')
+        moment(createdAt).format('DD-MM-YYYY')
       ),
     },
     {
@@ -366,7 +366,7 @@ export const categoryColumns = (handleView, handleDelete) => ([
     title: 'Date',
     dataIndex: 'createdAt',
     render: (_, { createdAt }) => (
-      moment(createdAt).format('YYYY-MM-DD')
+      moment(createdAt).format('DD-MM-YYYY')
     ),
     align: 'center'
   },
@@ -423,7 +423,7 @@ export const productColumn = (handleView, handleDelete, handleActive) => ([
     title: 'Added On',
     dataIndex: 'createdAt',
     render: (_, { createdAt }) => (
-      moment(createdAt).format('YYYY-MM-DD')
+      moment(createdAt).format('DD-MM-YYYY')
     ),
   },
   {
@@ -493,7 +493,7 @@ export const orderColumn = (handleView) => ([
     title: 'Date',
     dataIndex: 'createdAt',
     render: (_, { createdAt }) => (
-      moment(createdAt).format('YYYY-MM-DD')
+      moment(createdAt).format('DD-MM-YYYY')
     ),
   },
   {
@@ -539,7 +539,7 @@ export const customerColumn = (handleActive) => ([
     title: 'Added On',
     dataIndex: 'createdAt',
     render: (_, { createdAt }) => (
-      moment(createdAt).format('YYYY-MM-DD')
+      moment(createdAt).format('DD-MM-YYYY')
     ),
     align: 'center'
   }
@@ -566,11 +566,11 @@ export const couponColumn = (handleView, handleDelete, handleActive) => ([
     title: 'Start Date',
     key: 'createdAt',
 
-    render: (_, { createdAt }) => (moment(createdAt).format('YYYY-MM-DD'))
+    render: (_, { createdAt }) => (moment(createdAt).format('DD-MM-YYYY'))
   },
   {
     title: 'End Date',
-    render: (_, { expiryDate }) => (moment(expiryDate).format('YYYY-MM-DD')),
+    render: (_, { expiryDate }) => (moment(expiryDate).format('DD-MM-YYYY')),
     key: 'expiryDate',
   },
   {
@@ -629,7 +629,7 @@ export const sliderColumns = (handleView, handleDelete) => ([
     title: 'Date',
     dataIndex: 'createdAt',
     render: (_, { createdAt }) => (
-      moment(createdAt).format('YYYY-MM-DD')
+      moment(createdAt).format('DD-MM-YYYY')
     ),
     align: 'center'
   },
@@ -663,7 +663,7 @@ export const notificationColumns = (handleView) => ([
     title: 'Date',
     dataIndex: 'createdAt',
     render: (_, { createdAt }) => (
-      moment(createdAt).format('YYYY-MM-DD')
+      moment(createdAt).format('DD-MM-YYYY')
     ),
     align: 'center'
   },
@@ -717,7 +717,7 @@ export const schoolColumn = (handleActive) => ([
     title: 'Created At',
     dataIndex: 'createdAt',
     render: (_, { createdAt }) => (
-      moment(createdAt).format('YYYY-MM-DD')
+      moment(createdAt).format('DD-MM-YYYY')
     ),
     align: 'center'
   }
@@ -796,7 +796,7 @@ export const noticeBoardColumn = (handleView, handleDelete) => ([
     title: 'Created At',
     dataIndex: 'createdAt',
     render: (_, { createdAt }) => (
-      moment(createdAt).format('YYYY-MM-DD')
+      moment(createdAt).format('DD-MM-YYYY')
     ),
     align: 'center'
   },
@@ -822,8 +822,42 @@ export const noticeBoardColumn = (handleView, handleDelete) => ([
   }
 
 ])
+export const supportColumn = () => ([
+  {
+    title: 'Ticket ID',
+    key: 'id',
+    dataIndex: 'id',
+  },
+  {
+    title: 'Subject',
+    key: 'subject',
+    dataIndex: 'subject',
+  },
+  {
+    title: 'Message',
+    key: 'issue_or_message',
+    ellipsis: {
+      showTitle: true,
+    },
+    dataIndex: 'issue_or_message'
+  },
+  {
+    title: 'Created At',
+    dataIndex: 'createdAt',
+    render: (_, { createdAt }) => (
+      moment(createdAt).format('DD-MM-YYYY')
+    ),
+    align: 'center'
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    align: 'center'
+  },
 
-export const studentColumn = (handleView) => ([
+])
+
+export const studentColumn = (handleView,handleDelete) => ([
   {
     title: 'Student',
     key: 'student',
@@ -853,7 +887,7 @@ export const studentColumn = (handleView) => ([
     title: 'Created At',
     dataIndex: 'createdAt',
     render: (_, { createdAt }) => (
-      moment(createdAt).format('YYYY-MM-DD')
+      moment(createdAt).format('DD-MM-YYYY')
     ),
     align: 'center'
   },
@@ -862,6 +896,17 @@ export const studentColumn = (handleView) => ([
     render: (_, { id }) => (
       <Space>
         <Button type='default' shape="circle" onClick={() => handleView(id)} ><FaEdit size={16} /></Button>
+        <Popconfirm
+          title="Delete"
+          description="Are you sure to delete this?"
+          onConfirm={() => handleDelete(id)}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
+          placement="topRight"
+        >
+          <Button type='default' shape="circle" ><RiDeleteBin6Line size={16} /></Button>
+        </Popconfirm>
       </Space>
     ),
     align: 'center',

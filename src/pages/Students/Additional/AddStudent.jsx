@@ -16,6 +16,32 @@ const AddStudent = () => {
     const { sendRequest, isLoading } = useHttpForm()
     const navigate = useNavigate()
 
+     // Imp For File Hanlding
+
+     const [studentPhoto,setStudentPhoto] = useState(null)
+     const [parentSign,setParentSign] = useState(null)
+     const [studentSign,setStudentSign] = useState(null)
+ 
+     const dic = {
+         'student_photo':setStudentPhoto,
+         'student_signature':setStudentSign,
+         'parent_signature':setParentSign,
+     }
+ 
+     const handleFiles = (fileList,key)=>{
+         console.log(fileList)
+         dic[key](fileList.fileList)
+         form.setFieldValue(key,fileList)
+     }
+ 
+     const uploadProps = {
+         studentPhoto,
+         parentSign,
+         studentSign,
+         handleFiles
+     }
+ 
+
 
     const handleForm = (values) => {
 
@@ -23,15 +49,11 @@ const AddStudent = () => {
 
         formData.append('student_photo',values.student_photo.file)
         formData.append('student_signature',values.student_signature.file)
-        formData.append('center_signature',values.center_signature.file)
-        formData.append('school_principal_signature',values.school_principal_signature.file)
         formData.append('parent_signature',values.parent_signature.file)
 
         delete values.student_signature
         delete values.student_photo
         delete values.parent_signature
-        delete values.center_signature
-        delete values.school_principal_signature
 
         for (const key in values) {
             if (values.hasOwnProperty(key)) {
@@ -79,9 +101,7 @@ const AddStudent = () => {
                         span: 9,
                     }}
                     className={classes.my_flex}>
-                    <School_Info />
-                    <Center_Info />
-                    <Upload_Docuements />
+                    <Upload_Docuements {...uploadProps} />
                 </Col>
             </Row>
             <Button loading={isLoading} htmlType='submit' className={classes.bottom_btn} type='primary' size='large'>Add Student</Button>
