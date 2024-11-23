@@ -85,12 +85,24 @@ const EditStudent = () => {
         },result=>{
             form.setFieldsValue(result.data)
             console.log(result.data.student_photo)
-            // setStudentPhoto([{
-            //     uid:'-1',
-            //     name:'student-photo',
-            //     status:'done',
-            //     url:'file:///C:/Users/Puneet%20Shrivastav/Documents/GitHub/bihar_board_backend/app/uploads/1732236716221-Theater-Circle_page-0001.jpg'
-            // }])
+            setStudentPhoto([{
+                uid:'-1',
+                name:'student-photo',
+                status:'done',
+                url:result.data.student_photo
+            }])
+            setStudentSign([{
+                uid:'-1',
+                name:'student-photo',
+                status:'done',
+                url:result.data.student_signature
+            }])
+            setParentSign([{
+                uid:'-1',
+                name:'student-photo',
+                status:'done',
+                url:result.data.parent_signature
+            }])
             form.setFieldValue('dob_in_figures', moment(new Date).format('YYYY-MM-DD'))
         })
     },[])

@@ -2,13 +2,15 @@ import { DatePicker, Input, Select } from 'antd';
 import React from 'react'
 import { CiSearch } from "react-icons/ci";
 import classes from './filter.module.css'
+import moment from 'moment';
 
-function SearchAndFilter({ query, setQuery }) {
+function SearchAndFilter({ query, setQuery , date , setDate  }) {
 
 
-    const hand = value => {
-        console.log(value)
-
+    const hand = e => {
+    //    let d = e.target.value 
+    let newDate = moment(e).format('YYYY-MM-DD')
+        setDate(newDate)
     }
 
     return (
@@ -25,8 +27,9 @@ function SearchAndFilter({ query, setQuery }) {
                 style={{ gap: 10 }}
             >
                 <DatePicker
-                    onChange={hand}
+                   onChange={hand}
                 />
+                
             </div>
         </div>
     )

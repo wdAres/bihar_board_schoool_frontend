@@ -14,14 +14,58 @@ import SearchAndFilter from '../../components/filter/SearchAndFilter'
 const Students = () => {
 
   const center_id = JSON.parse(Cookies.get('school') ?? {})?.user?.id
-  const [date, setDate] = useState(new Date())
-  const [query, setQuery] = useState('')
+  // const token = JSON.parse(Cookies.get('admin') ?? {})?.token
   const { sendRequest, isLoading } = useHttp2()
+  const { sendRequest: handleDataDownload, isLoading: dataDownloadLoading } = useHttp2()
   const [data, setData] = useState([])
   const [pageDetails, setPageDetails] = useState({})
   const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
   const navigation = useNavigate()
+  // For Filter
+  const [date, setDate] = useState('')
+  const [query, setQuery] = useState('')
+
+  const filterProps = {
+    query,
+    setQuery,
+    date,
+    setDate
+  }
+
+//   const downloadExcelFile = async () => {
+//     try {
+//         const response = await fetch('http://127.0.0.1:8001/api/v1/download-students-xls', {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/vnd.ms-excel', 
+//                 'Authorization':`Bearer ${token}`
+//             }
+//         });
+
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
+
+//         const blob = await response.blob();
+
+//         // Create a URL for the blob
+//         const url = window.URL.createObjectURL(blob);
+
+//         // Create an anchor element and simulate a click
+//         const link = document.createElement('a');
+//         link.href = url;
+//         link.setAttribute('download', 'file.xls'); // Set the file name
+//         document.body.appendChild(link);
+//         link.click();
+//         document.body.removeChild(link);
+//     } catch (error) {
+//         console.error('Error downloading the file:', error);
+//     }
+// };
+
+
+
 
   const paginationObject = {
     pageDetails,
@@ -31,18 +75,12 @@ const Students = () => {
     setPage
   }
 
-  const filterProps = {
-    query,
-    setQuery,
-    date,
-    setDate
-  }
 
   const navigate = useNavigate()
 
   const getData = () => {
     sendRequest({
-      url: `students/center/${center_id}?limit=${limit}&page=${page}&search=${query}`
+      url: `students/center/${center_id}?limit=${limit}&page=${page}&search=${query}&date=${date}`
     }, result => {
       setData(result.data.docs)
       setPageDetails({ ...result.data, docs: [] })
@@ -51,21 +89,21 @@ const Students = () => {
   const handleDelete = (id) => {
     sendRequest({
       url: `students/${id}`,
-      method:'DELETE'
+      method: 'DELETE'
     }, result => {
       getData()
-    },true)
+    }, true)
   }
 
   useEffect(() => {
     getData()
-  }, [limit, page, query])
+  }, [limit, page, query, date])
 
   useEffect(() => {
     setPage(1)
-  }, [query])
+  }, [query, date])
 
-  const columns = studentColumn((id) => navigate(`edit/${id}`),handleDelete)
+  const columns = studentColumn((id) => navigate(`edit/${id}`), handleDelete)
 
   return (
     <>
@@ -78,11 +116,11 @@ const Students = () => {
       >
         <PageHeader heading={'Students List'} >
           <Space>
-            <Button icon={<FaDownload />} type='default'>Download Data</Button>
+            {/* <Button onClick={downloadExcelFile} disabled={dataDownloadLoading} icon={<FaDownload />} type='default'>Download Data</Button> */}
             <Button onClick={() => navigate('add')} type='primary' icon={<FaPlus />}  >Add Student</Button>
           </Space>
         </PageHeader>
-        <SearchAndFilter query={query} setQuery={setQuery} />
+        <SearchAndFilter {...filterProps} />
         {/* <SearchBar func={setQuery} value={query} placeholder={'Search Students by name'} /> */}
         <h4 style={{ color: 'var(--color_black_2)', fontWeight: '500' }}>
           {pageDetails?.totalDocs ?? 0} Results</h4>
