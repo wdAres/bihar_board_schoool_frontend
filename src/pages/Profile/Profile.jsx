@@ -21,7 +21,6 @@ function Profile() {
     }
 
     const handleFiles = (fileList,key)=>{
-        console.log(fileList)
         dic[key](fileList.fileList)
         form.setFieldValue(key,fileList)
     }

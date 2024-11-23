@@ -39,6 +39,7 @@ const EditNotice = () => {
             url: `notices/${id}`
         }, result => {
             form.setFieldValue('label',result.data.label)
+            
         })
     }, [])
 

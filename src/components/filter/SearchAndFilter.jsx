@@ -8,7 +8,6 @@ function SearchAndFilter({ query, setQuery , date , setDate  }) {
 
 
     const hand = e => {
-    //    let d = e.target.value 
     let newDate = moment(e).format('YYYY-MM-DD')
         setDate(newDate)
     }

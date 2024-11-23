@@ -13,10 +13,10 @@ const Upload_Docuements = ({studentPhoto=[] ,studentSign=[],parentSign=[], handl
 
 
     const uploadButton = (
-        <div>
+        <Flex align='center' justify='center' vertical>
             <FaPlus />
             <div className="ant-upload-text">Upload</div>
-        </div>
+        </Flex>
     );
 
     const inputFields = [

@@ -13,9 +13,9 @@ import SearchAndFilter from '../../components/filter/SearchAndFilter'
 
 const Students = () => {
 
-  const center_id = JSON.parse(Cookies.get('school') ?? {})?.user?.id
   // const token = JSON.parse(Cookies.get('admin') ?? {})?.token
   const { sendRequest, isLoading } = useHttp2()
+  const center_id = JSON.parse(Cookies.get('school') ?? {})?.user?.id
   const { sendRequest: handleDataDownload, isLoading: dataDownloadLoading } = useHttp2()
   const [data, setData] = useState([])
   const [pageDetails, setPageDetails] = useState({})

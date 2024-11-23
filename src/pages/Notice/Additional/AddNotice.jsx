@@ -12,6 +12,7 @@ const AddNotice = () => {
     const [form] = Form.useForm();
     const { sendRequest, isLoading } = useHttpForm()
     const navigate = useNavigate()
+    
 
 
     const handleForm = (values) => {

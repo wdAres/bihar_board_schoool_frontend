@@ -822,6 +822,7 @@ export const noticeBoardColumn = (handleView, handleDelete) => ([
   }
 
 ])
+
 export const supportColumn = () => ([
   {
     title: 'Ticket ID',

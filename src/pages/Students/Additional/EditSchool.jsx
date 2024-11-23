@@ -118,7 +118,7 @@ const EditStudent = () => {
             className={``}>
             <Row
                 gutter={20}
-            >
+                >
                 <Col
                     xs={{
                         span: 24,
@@ -126,7 +126,7 @@ const EditStudent = () => {
                     lg={{
                         span: 15,
                     }}
-
+                    
                     className={classes.my_flex}>
                     <S_Info />
                 </Col>
