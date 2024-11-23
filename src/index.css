@@ -94,3 +94,8 @@ main{
     align-items: flex-start;
   }
 }
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

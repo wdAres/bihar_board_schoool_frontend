@@ -6,7 +6,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import TwoLines from "../components/UI/TwoLines";
 import moment from "moment";
 import { CiEdit } from "react-icons/ci";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaEye } from "react-icons/fa";
 
 const confirm = (e) => {
   message.success('Click on Yes');
@@ -858,7 +858,7 @@ export const supportColumn = () => ([
 
 ])
 
-export const studentColumn = (handleView,handleDelete) => ([
+export const studentColumn = (handleEdit,handleDelete,handleView) => ([
   {
     title: 'Student',
     key: 'student',
@@ -896,7 +896,8 @@ export const studentColumn = (handleView,handleDelete) => ([
     title: 'Action',
     render: (_, { id }) => (
       <Space>
-        <Button type='default' shape="circle" onClick={() => handleView(id)} ><FaEdit size={16} /></Button>
+        <Button type='default' shape="circle" onClick={() => handleView(id)} ><FaEye size={16} /></Button>
+        <Button type='default' shape="circle" onClick={() => handleEdit(id)} ><FaEdit size={16} /></Button>
         <Popconfirm
           title="Delete"
           description="Are you sure to delete this?"
