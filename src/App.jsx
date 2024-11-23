@@ -19,6 +19,7 @@ import VerifyProfile from './pages/Auth/VerifyProfile'
 import Support from './pages/Support/Support'
 import AddSupport from './pages/Support/Additional/AddSupport'
 import Profile from './pages/Profile/Profile'
+import View from './pages/Students/View'
 
 
 const someLinks = ['/login', '/signup', '/forget', '/admin_login/:resetToken']
@@ -52,6 +53,9 @@ function App() {
               <Route path='/profile'  >
                 <Route index element={<Profile />} />
               </Route>
+              <Route path='/view'  >
+                <Route index element={<View />} />
+              </Route>
               <Route path='/support'  >
                 <Route index element={<Support />} />
                 <Route path='/support/add' element={<AddSupport />} />
@@ -59,6 +63,7 @@ function App() {
               <Route path='/student'  >
                 <Route index element={<Students />} />
                 <Route path='/student/add' element={<AddStudent />} />
+                <Route path='/student/view/:id' element={<View />} />
                 <Route path='/student/edit/:id' element={<EditStudent />} />
               </Route>
             </Routes>

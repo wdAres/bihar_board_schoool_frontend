@@ -54,7 +54,13 @@ function Sidebar({ sidebar, handleSidebar }) {
             icon: <PiStudent size={14} />,
             label: 'Support',
             link: '/support'
-        }
+        },
+        // {
+        //     key: '05',
+        //     icon: <PiStudent size={14} />,
+        //     label: 'View',
+        //     link: '/view'
+        // }
     ]
 
     const cssObject = sidebar ? { left: '0' } : {}

@@ -103,7 +103,7 @@ const Students = () => {
     setPage(1)
   }, [query, date])
 
-  const columns = studentColumn((id) => navigate(`edit/${id}`), handleDelete)
+  const columns = studentColumn((id) => navigate(`edit/${id}`), handleDelete , id=>navigate(`view/${id}`))
 
   return (
     <>
