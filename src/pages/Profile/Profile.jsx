@@ -17,11 +17,13 @@ function Profile() {
     const [principalSign,setPrincipalSign] = useState(null)
 
     const dic = {
-        'student_prinipal_signature':setPrincipalSign,
+        'school_prinipal_signature':setPrincipalSign,
     }
 
     const handleFiles = (fileList,key)=>{
-        dic[key](fileList.fileList)
+        console.log(key)
+        // dic[key](fileList.fileList)
+        setPrincipalSign(fileList.fileList)
         form.setFieldValue(key,fileList)
     }
 
@@ -32,8 +34,8 @@ function Profile() {
 
         const formData = new FormData()
 
-        if (typeof values.student_principal_signature !=='string' && values.student_principal_signature.file) {
-            formData.append('student_principal_signature', values.student_principal_signature.file);
+        if (typeof values.school_principal_signature !=='string' && values.school_principal_signature.file) {
+            formData.append('school_principal_signature', values.school_principal_signature.file);
         }
 
          delete values.school_principal_signature
@@ -63,6 +65,12 @@ function Profile() {
             url: `center/details`
         }, result => {
             form.setFieldsValue(result.data)
+            setPrincipalSign([{
+                uid:'-1',
+                name:'school_principal_signature',
+                status:'done',
+                url:result.data.school_principal_signature  
+            }])
         })
     }, [])
 
