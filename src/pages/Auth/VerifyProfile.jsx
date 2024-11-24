@@ -124,6 +124,7 @@ function VerifyProfile() {
   const [form] = Form.useForm();
   const { sendRequest, isLoading } = useHttpForm()
   const navigate = useNavigate()
+  const id = Cookies.get('school') ? JSON.parse(Cookies.get('school')).user.id : ''
 
   const handleForm = values => {
 
@@ -144,11 +145,11 @@ function VerifyProfile() {
     formData.append('profile_review', true)
 
     sendRequest({
-      url: `center/details`,
+      url: `center/${id}`,
       method: 'PATCH',
       body: formData
     }, result => {
-      const token = JSON.parse(Cookies.get('school') ?? {})
+      const token = JSON.parse(Cookies.get('school'))?.token
       Cookies.set('school', JSON.stringify({
         user: result.data,
         token
@@ -162,7 +163,7 @@ function VerifyProfile() {
 
   useEffect(() => {
     sendRequest({
-      url: `center/details`
+      url: `center/${id}`
     }, result => {
       form.setFieldsValue(result.data)
       if (result.data.profile_review) {

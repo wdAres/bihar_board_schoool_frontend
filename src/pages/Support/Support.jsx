@@ -9,10 +9,10 @@ import SearchBar from '../../components/filter/SearchBar'
 import { FaDownload, FaPlus } from 'react-icons/fa'
 import { Button, Space } from 'antd'
 import SearchAndFilter from '../../components/filter/SearchAndFilter'
-
+import Cookies from 'js-cookie'
 const Support = () => {
 
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState('')
   const [query, setQuery] = useState('')
   const { sendRequest, isLoading } = useHttp2()
   const [data, setData] = useState([])
@@ -20,6 +20,7 @@ const Support = () => {
   const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
   const navigation = useNavigate()
+  const id = Cookies.get('school') ? JSON.parse(Cookies.get('school')).user.id : ''
 
   const paginationObject = {
     pageDetails,
@@ -40,7 +41,7 @@ const Support = () => {
 
   const getData = () => {
     sendRequest({
-      url: `supports/center?limit=${limit}&page=${page}&search=${query}`
+      url: `support/center/true?limit=${limit}&page=${page}&search=${query}`
     }, result => {
       setData(result.data.docs)
       setPageDetails({ ...result.data, docs: [] })

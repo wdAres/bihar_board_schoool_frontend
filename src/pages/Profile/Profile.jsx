@@ -12,7 +12,7 @@ function Profile() {
     const [form] = Form.useForm();
     const { sendRequest, isLoading } = useHttpForm()
     const navigate = useNavigate()
-
+const id = Cookies.get('school') ? JSON.parse(Cookies.get('school')).user.id : ''
     
     const [principalSign,setPrincipalSign] = useState(null)
 
@@ -21,8 +21,6 @@ function Profile() {
     }
 
     const handleFiles = (fileList,key)=>{
-        console.log(key)
-        // dic[key](fileList.fileList)
         setPrincipalSign(fileList.fileList)
         form.setFieldValue(key,fileList)
     }
@@ -47,11 +45,11 @@ function Profile() {
         }
 
         sendRequest({
-            url: `center/details`,
+            url: `center/${id}`,
             method: 'PATCH',
             body: formData
         }, result => {
-            const token = JSON.parse(Cookies.get('school') ?? {})
+            const token = JSON.parse(Cookies.get('school') ?? {}).token
             Cookies.set('school', JSON.stringify({
                 user: result.data,
                 token
@@ -62,14 +60,14 @@ function Profile() {
 
     useEffect(() => {
         sendRequest({
-            url: `center/details`
+            url: `center/${id}`
         }, result => {
             form.setFieldsValue(result.data)
             setPrincipalSign([{
                 uid:'-1',
                 name:'school_principal_signature',
                 status:'done',
-                url:result.data.school_principal_signature  
+                url:'http://127.0.0.1:8001/'+result.data.school_principal_signature  
             }])
         })
     }, [])

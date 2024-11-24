@@ -72,7 +72,7 @@ const EditStudent = () => {
 
         sendRequest({
             url: `students/${id}`,
-            method: 'PUT',
+            method: 'PATCH',
             body: formData
         }, result => {
             navigate('/student')
@@ -81,7 +81,7 @@ const EditStudent = () => {
 
     useEffect(()=>{
         sendRequest({
-            url:`students/${id}`,
+            url:`student/${id}`,
         },result=>{
             form.setFieldsValue(result.data)
             console.log(result.data.student_photo)
@@ -143,10 +143,7 @@ const EditStudent = () => {
                     />
                 </Col>
             </Row>
-            <Flex align='center' justify='space-between'>
-            <Button loading={isLoading}  htmlType='button' className={classes.bottom_btn} onClick={()=>navigate(-1)} size='large'>Back</Button>
             <Button loading={isLoading} htmlType='submit' className={classes.bottom_btn} type='primary' size='large'>Edit Student</Button>
-            </Flex>
         </Form>
     )
 }

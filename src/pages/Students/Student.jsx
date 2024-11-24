@@ -80,7 +80,7 @@ const Students = () => {
 
   const getData = () => {
     sendRequest({
-      url: `students/center/${center_id}?limit=${limit}&page=${page}&search=${query}&date=${date}`
+      url: `student/center/${center_id}?limit=${limit}&page=${page}&search=${query}&date=${date}`
     }, result => {
       setData(result.data.docs)
       setPageDetails({ ...result.data, docs: [] })

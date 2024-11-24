@@ -62,7 +62,7 @@ const AddStudent = () => {
         }
 
         sendRequest({
-            url: `students`,
+            url: `student`,
             method: 'POST',
             body: formData
         }, result => {

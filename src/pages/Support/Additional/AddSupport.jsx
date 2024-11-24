@@ -18,7 +18,7 @@ const AddSupport = () => {
       
 
         sendRequest({
-            url: `supports`,
+            url: `support`,
             method: 'POST',
             body: values
         }, result => {
