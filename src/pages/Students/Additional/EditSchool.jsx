@@ -71,7 +71,7 @@ const EditStudent = () => {
         }
 
         sendRequest({
-            url: `students/${id}`,
+            url: `student/${id}`,
             method: 'PATCH',
             body: formData
         }, result => {
