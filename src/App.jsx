@@ -20,6 +20,7 @@ import Support from './pages/Support/Support'
 import AddSupport from './pages/Support/Additional/AddSupport'
 import Profile from './pages/Profile/Profile'
 import View from './pages/Students/View'
+import StudentDetails from './pages/Students/Additional/StudentDetails'
 
 
 const someLinks = ['/login', '/signup', '/forget', '/admin_login/:resetToken']
@@ -63,8 +64,9 @@ function App() {
               <Route path='/student'  >
                 <Route index element={<Students />} />
                 <Route path='/student/add' element={<AddStudent />} />
-                <Route path='/student/view/:id' element={<View />} />
+                {/* <Route path='/student/view/:id' element={<View />} /> */}
                 <Route path='/student/edit/:id' element={<EditStudent />} />
+                <Route path='/student/view/:id' element={<StudentDetails />} />
               </Route>
             </Routes>
           </LayoutFile>
