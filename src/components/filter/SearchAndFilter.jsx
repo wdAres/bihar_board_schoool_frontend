@@ -8,8 +8,13 @@ function SearchAndFilter({ query, setQuery , date , setDate  }) {
 
 
     const hand = e => {
-    let newDate = moment(e).format('YYYY-MM-DD')
-        setDate(newDate)
+        const d = e.target.value;
+        let newDate = moment(d).format('YYYY-MM-DD')
+        if (newDate !=='Invalid date') {
+            setDate(newDate)
+            return ;
+        }
+        else setDate('')
     }
 
     return (
@@ -25,9 +30,7 @@ function SearchAndFilter({ query, setQuery , date , setDate  }) {
                 className={classes.res_flex_div}
                 style={{ gap: 10 }}
             >
-                <DatePicker
-                   onChange={hand}
-                />
+                <Input type='date' onChange={hand} />
                 
             </div>
         </div>

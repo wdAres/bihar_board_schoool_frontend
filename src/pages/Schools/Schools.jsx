@@ -12,7 +12,7 @@ import { FaPlus } from 'react-icons/fa'
 
 const Schools = () => {
 
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState('')
   const [query, setQuery] = useState('')
   const { sendRequest, isLoading } = useHttp2()
   const [data, setData] = useState([])
@@ -41,7 +41,7 @@ const Schools = () => {
   const getData = () => {
     console.log('we are here')
     sendRequest({
-        url: `center?limit=${limit}&page=${page}&search=${query}`
+        url: `center?limit=${limit}&page=${page}&search=${query}&date=${date}`
     }, result => {
       setData(result.data.docs)
       setPageDetails({ ...result.data, docs: [] })
@@ -50,11 +50,11 @@ const Schools = () => {
 
   useEffect(() => {
     getData()
-  }, [limit, page, query])
+  }, [limit, page, query,date])
 
   useEffect(() => {
     setPage(1)
-  }, [query])
+  }, [query,date])
 
 
   const handleActive = (id, activeStatus) => {
@@ -81,6 +81,7 @@ const Schools = () => {
         <PageHeader heading={'Schools List'} >
           <Button onClick={()=>navigate('add')} type='primary' icon={<FaPlus/>}  >Add School</Button>
         </PageHeader>
+
         {/* <SearchBar func={setQuery} value={query} placeholder={'Search Schools by name'} /> */}
         <h4 style={{ color: 'var(--color_black_2)', fontWeight: '500' }}>
           {pageDetails?.totalDocs ?? 0} Results</h4>

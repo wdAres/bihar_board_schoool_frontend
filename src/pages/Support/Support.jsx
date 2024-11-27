@@ -41,7 +41,7 @@ const Support = () => {
 
   const getData = () => {
     sendRequest({
-      url: `support/center/true?limit=${limit}&page=${page}&search=${query}`
+      url: `support/center/true?limit=${limit}&page=${page}&search=${query}&date=${date}`
     }, result => {
       setData(result.data.docs)
       setPageDetails({ ...result.data, docs: [] })
@@ -50,11 +50,11 @@ const Support = () => {
 
   useEffect(() => {
     getData()
-  }, [limit, page, query])
+  }, [limit, page, query,date])
 
   useEffect(() => {
     setPage(1)
-  }, [query])
+  }, [query,date])
 
   const columns = supportColumn()
 
@@ -72,7 +72,7 @@ const Support = () => {
             <Button onClick={() => navigate('add')} type='primary' icon={<FaPlus />}  >Add Ticket</Button>
           </Space>
         </PageHeader>
-        <SearchAndFilter query={query} setQuery={setQuery} />
+        <SearchAndFilter {...filterProps} />
         {/* <SearchBar func={setQuery} value={query} placeholder={'Search Support by name'} /> */}
         <h4 style={{ color: 'var(--color_black_2)', fontWeight: '500' }}>
           {pageDetails?.totalDocs ?? 0} Results</h4>
