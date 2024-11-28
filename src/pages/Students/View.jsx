@@ -252,7 +252,7 @@ const View = () => {
                 <div>
                     <label className="block text-sm font-medium text-gray-600">School Principal Signature</label>
                     <img
-                        src={'http://127.0.0.1:8001/'+student?.center?.school_principal_signature}
+                        src={url+student?.center?.school_principal_signature}
                         alt="Principal Signature"
                         className="w-40 h-32 object-cover rounded-lg border mt-2"
                     />

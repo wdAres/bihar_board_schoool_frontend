@@ -6,23 +6,25 @@ import useHttpForm from '../../hooks/useHttpForm';
 import { useNavigate } from 'react-router';
 import { FaPlus } from 'react-icons/fa';
 import Cookies from 'js-cookie';
+import { BASE_API, BASE_URL } from '../../utils/BASE_URL';
 
 function Profile() {
 
+    console.log(BASE_API+'/')
     const [form] = Form.useForm();
     const { sendRequest, isLoading } = useHttpForm()
     const navigate = useNavigate()
-const id = Cookies.get('school') ? JSON.parse(Cookies.get('school')).user.id : ''
-    
-    const [principalSign,setPrincipalSign] = useState(null)
+    const id = Cookies.get('school') ? JSON.parse(Cookies.get('school')).user.id : '';
+
+    const [principalSign, setPrincipalSign] = useState(null)
 
     const dic = {
-        'school_prinipal_signature':setPrincipalSign,
+        'school_prinipal_signature': setPrincipalSign,
     }
 
-    const handleFiles = (fileList,key)=>{
+    const handleFiles = (fileList, key) => {
         setPrincipalSign(fileList.fileList)
-        form.setFieldValue(key,fileList)
+        form.setFieldValue(key, fileList)
     }
 
 
@@ -32,11 +34,11 @@ const id = Cookies.get('school') ? JSON.parse(Cookies.get('school')).user.id : '
 
         const formData = new FormData()
 
-        if (typeof values.school_principal_signature !=='string' && values.school_principal_signature.file) {
+        if (typeof values.school_principal_signature !== 'string' && values.school_principal_signature.file) {
             formData.append('school_principal_signature', values.school_principal_signature.file);
         }
 
-         delete values.school_principal_signature
+        delete values.school_principal_signature
 
         for (const key in values) {
             if (values.hasOwnProperty(key)) {
@@ -64,10 +66,10 @@ const id = Cookies.get('school') ? JSON.parse(Cookies.get('school')).user.id : '
         }, result => {
             form.setFieldsValue(result.data)
             setPrincipalSign([{
-                uid:'-1',
-                name:'school_principal_signature',
-                status:'done',
-                url:'http://127.0.0.1:8001/'+result.data.school_principal_signature  
+                uid: '-1',
+                name: 'school_principal_signature',
+                status: 'done',
+                url: `${BASE_API}/${result.data.school_principal_signature}`
             }])
         })
     }, [])
@@ -169,8 +171,8 @@ const id = Cookies.get('school') ? JSON.parse(Cookies.get('school')).user.id : '
                 beforeUpload: x => false,
                 listType: 'picture-card',
                 maxCount: 1,
-                fileList:principalSign,
-                onChange:fileList=>handleFiles(fileList,'school_principal_signature')
+                fileList: principalSign,
+                onChange: fileList => handleFiles(fileList, 'school_principal_signature')
             },
             element: (data) => <Upload {...data} >
                 <button
@@ -219,7 +221,7 @@ const id = Cookies.get('school') ? JSON.parse(Cookies.get('school')).user.id : '
                 </Col>
             </Row>
             <Flex align='center' justify='flex-end'>
-            <Button htmlType='submit' className={classes.btn} disabled={isLoading} type='primary'>Update Profile</Button>
+                <Button htmlType='submit' className={classes.btn} disabled={isLoading} type='primary'>Update Profile</Button>
             </Flex>
         </Form>
     )
