@@ -96,25 +96,53 @@ const Students = () => {
       getData()
     }, true)
   }
-  const viewAdmitCard = (id) => {
-    reqHtml({
-      url: `student/admit-card/${id}`,
-    }, blob => {
 
-      
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'admit_card.pdf';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      window.URL.revokeObjectURL(url);
-      // const newTab = window.open('', '_blank'); // Write the received HTML content to the new tab 
-      // newTab.document.open(); 
-      // newTab.document.write(result);
-      //  newTab.document.close();
-    }, true)
-  }
+  const viewAdmitCard = (id) => {
+    sendRequest({
+      url: 'generate-admit-card',
+      method: 'POST',
+      body: {
+        student_id: id
+      }
+    }, (res) => {
+
+      console.log(res);
+
+      const { admit_card } = res.data;
+      if (!admit_card) {
+        console.error('Admit card URL is undefined');
+        return;
+      }
+
+      const url = admit_card;
+      const newTab = window.open();
+      if (newTab) {
+        newTab.location.href = url;
+      } else {
+        console.error('Failed to open new tab. Check your browser settings for pop-up blockers.');
+      }
+    }, true);
+  };
+
+  const downloadAllAdmitCards = () => {
+    sendRequest({
+        url: 'generate-admit-cards',
+        method: 'POST',
+        responseType: 'blob' // Ensure response type is blob for file download
+    },
+    (res) => {
+        const url = window.URL.createObjectURL(new Blob([res]));
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'all_admit_cards.zip';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    }, true);
+};
+
+
+
 
   useEffect(() => {
     getData()
@@ -124,7 +152,7 @@ const Students = () => {
     setPage(1)
   }, [query, date])
 
-  const columns = studentColumn((id) => navigate(`edit/${id}`), handleDelete, id => navigate(`view/${id}`), id => viewAdmitCard(id))
+  const columns = studentColumn((id) => navigate(`edit/${id}`), handleDelete, id => navigate(`view/${id}`), (id) => viewAdmitCard(id))
 
   return (
     <>
@@ -137,7 +165,7 @@ const Students = () => {
       >
         <PageHeader heading={'Students List'} >
           <Space>
-            {/* <Button onClick={downloadExcelFile} disabled={dataDownloadLoading} icon={<FaDownload />} type='default'>Download Data</Button> */}
+            <Button icon={<FaDownload />} type="default" onClick={downloadAllAdmitCards}> Download All Admit Cards </Button>
             <Button onClick={() => navigate('add')} type='primary' icon={<FaPlus />}  >Add Student</Button>
           </Space>
         </PageHeader>
