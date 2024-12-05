@@ -858,7 +858,7 @@ export const supportColumn = () => ([
 
 ])
 
-export const studentColumn = (handleEdit,handleDelete,handleView) => ([
+export const studentColumn = (handleEdit,handleDelete,handleView , viewAdmitCard) => ([
   {
     title: 'Student',
     key: 'student',
@@ -889,6 +889,14 @@ export const studentColumn = (handleEdit,handleDelete,handleView) => ([
     dataIndex: 'createdAt',
     render: (_, { createdAt }) => (
       moment(createdAt).format('DD-MM-YYYY')
+    ),
+    align: 'center'
+  },
+  {
+    title: 'Admit Card',
+    dataIndex: 'id',
+    render: (_, { id }) => (
+      <button onClick={()=>viewAdmitCard(id)}>View</button>
     ),
     align: 'center'
   },

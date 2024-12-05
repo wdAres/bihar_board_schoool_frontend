@@ -10,11 +10,13 @@ import { FaDownload, FaPlus } from 'react-icons/fa'
 import { Button, Space } from 'antd'
 import Cookies from 'js-cookie'
 import SearchAndFilter from '../../components/filter/SearchAndFilter'
+import useHttpHtml from '../../hooks/useHttpHtml'
 
 const Students = () => {
 
   // const token = JSON.parse(Cookies.get('admin') ?? {})?.token
   const { sendRequest, isLoading } = useHttp2()
+  const { sendRequest: reqHtml, isLoading: htmlLoading } = useHttpHtml()
   const center_id = JSON.parse(Cookies.get('school') ?? {})?.user?.id
   const { sendRequest: handleDataDownload, isLoading: dataDownloadLoading } = useHttp2()
   const [data, setData] = useState([])
@@ -33,36 +35,36 @@ const Students = () => {
     setDate
   }
 
-//   const downloadExcelFile = async () => {
-//     try {
-//         const response = await fetch('http://127.0.0.1:8001/api/v1/download-students-xls', {
-//             method: 'GET',
-//             headers: {
-//                 'Content-Type': 'application/vnd.ms-excel', 
-//                 'Authorization':`Bearer ${token}`
-//             }
-//         });
+  //   const downloadExcelFile = async () => {
+  //     try {
+  //         const response = await fetch('http://127.0.0.1:8001/api/v1/download-students-xls', {
+  //             method: 'GET',
+  //             headers: {
+  //                 'Content-Type': 'application/vnd.ms-excel', 
+  //                 'Authorization':`Bearer ${token}`
+  //             }
+  //         });
 
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
+  //         if (!response.ok) {
+  //             throw new Error('Network response was not ok');
+  //         }
 
-//         const blob = await response.blob();
+  //         const blob = await response.blob();
 
-//         // Create a URL for the blob
-//         const url = window.URL.createObjectURL(blob);
+  //         // Create a URL for the blob
+  //         const url = window.URL.createObjectURL(blob);
 
-//         // Create an anchor element and simulate a click
-//         const link = document.createElement('a');
-//         link.href = url;
-//         link.setAttribute('download', 'file.xls'); // Set the file name
-//         document.body.appendChild(link);
-//         link.click();
-//         document.body.removeChild(link);
-//     } catch (error) {
-//         console.error('Error downloading the file:', error);
-//     }
-// };
+  //         // Create an anchor element and simulate a click
+  //         const link = document.createElement('a');
+  //         link.href = url;
+  //         link.setAttribute('download', 'file.xls'); // Set the file name
+  //         document.body.appendChild(link);
+  //         link.click();
+  //         document.body.removeChild(link);
+  //     } catch (error) {
+  //         console.error('Error downloading the file:', error);
+  //     }
+  // };
 
 
 
@@ -94,6 +96,25 @@ const Students = () => {
       getData()
     }, true)
   }
+  const viewAdmitCard = (id) => {
+    reqHtml({
+      url: `student/admit-card/${id}`,
+    }, blob => {
+
+      
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'admit_card.pdf';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+      // const newTab = window.open('', '_blank'); // Write the received HTML content to the new tab 
+      // newTab.document.open(); 
+      // newTab.document.write(result);
+      //  newTab.document.close();
+    }, true)
+  }
 
   useEffect(() => {
     getData()
@@ -103,7 +124,7 @@ const Students = () => {
     setPage(1)
   }, [query, date])
 
-  const columns = studentColumn((id) => navigate(`edit/${id}`), handleDelete , id=>navigate(`view/${id}`))
+  const columns = studentColumn((id) => navigate(`edit/${id}`), handleDelete, id => navigate(`view/${id}`), id => viewAdmitCard(id))
 
   return (
     <>
