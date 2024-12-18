@@ -922,3 +922,41 @@ export const studentColumn = (handleEdit,handleDelete,handleView , viewAdmitCard
     align: 'center',
   }
 ])
+
+
+export const employeeColumns = () => ([
+  {
+    title: 'First Name',
+    key: 'firstName',
+    dataIndex: 'firstName',
+  },
+  {
+    title: 'Last Name',
+    key: 'lastName',
+    dataIndex: 'lastName',
+  },
+  {
+    title: 'Email',
+    key: 'email',
+    dataIndex: 'email',
+  },
+  {
+    title: 'Phone Number',
+    key: 'phoneNumber',
+    dataIndex: 'phoneNumber',
+  },
+  {
+    title: 'Designation',
+    key: 'designation',
+    dataIndex: 'designation',
+  },
+ 
+  {
+    title: 'Created At',
+    dataIndex: 'createdAt',
+    render: (_, { createdAt }) => (
+      moment(createdAt).format('DD-MM-YYYY')
+    ),
+    align: 'center'
+  }
+]);

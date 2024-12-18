@@ -21,6 +21,9 @@ import AddSupport from './pages/Support/Additional/AddSupport'
 import Profile from './pages/Profile/Profile'
 import View from './pages/Students/View'
 import StudentDetails from './pages/Students/Additional/StudentDetails'
+import AddEmployee from './pages/Employee/Additional/AddEmployee'
+import Employee from './pages/Employee/Employee'
+import Property from './pages/SchoolProperty/Property'
 
 
 const someLinks = ['/login', '/signup', '/forget', '/admin_login/:resetToken']
@@ -67,6 +70,13 @@ function App() {
                 {/* <Route path='/student/view/:id' element={<View />} /> */}
                 <Route path='/student/edit/:id' element={<EditStudent />} />
                 <Route path='/student/view/:id' element={<StudentDetails />} />
+              </Route>
+              <Route path='/property'  >
+                <Route index element={<Property />} />
+                </Route>
+              <Route path='/employee'  >
+                <Route index element={<Employee />} />
+                <Route path='/employee/add' element={<AddEmployee />} />
               </Route>
             </Routes>
           </LayoutFile>

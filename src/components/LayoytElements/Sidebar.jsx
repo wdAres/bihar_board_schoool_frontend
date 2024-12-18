@@ -55,6 +55,18 @@ function Sidebar({ sidebar, handleSidebar }) {
             label: 'Support',
             link: '/support'
         },
+        {
+            key: '05',
+            icon: <PiStudent size={14} />,
+            label: 'Employee',
+            link: '/employee'
+        },
+        {
+            key: '05',
+            icon: <PiStudent size={14} />,
+            label: 'School Property',
+            link: '/property'
+        },
         // {
         //     key: '05',
         //     icon: <PiStudent size={14} />,
