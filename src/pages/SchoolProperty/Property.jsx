@@ -12,8 +12,8 @@ const Property = () => {
     const navigate = useNavigate();
 
     const handleForm = (values) => {
-        alert(values)
-        const formData = new FormData()
+        // alert(values)
+       
         sendRequest({
             url: `Property/${id}`,
             method: 'PATCH',
